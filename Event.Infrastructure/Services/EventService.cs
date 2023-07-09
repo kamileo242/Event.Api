@@ -3,6 +3,7 @@ using Evento.Core.Domain;
 using Evento.Core.Repositories;
 using Evento.Infrastructure.DTO;
 using Evento.Infrastructure.Extensions;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -17,11 +18,13 @@ namespace Evento.Infrastructure.Services
     {
         private readonly IEventRepository _eventRepository;
         private readonly IMapper _mapper;
+        private readonly ILogger _logger;
 
-        public EventService(IEventRepository eventRepository, IMapper mapper)
+        public EventService(IEventRepository eventRepository, IMapper mapper, ILogger<EventService> logger)
         {
             _eventRepository = eventRepository;
             _mapper = mapper;
+            _logger = logger;
         }
 
         public async Task<EventDetailsDto> GetAsync(Guid id)

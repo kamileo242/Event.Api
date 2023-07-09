@@ -17,6 +17,9 @@ builder.Services.AddScoped<IEventRepository, EventRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IEventService, EventService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ITicketService, TicketService>();
+
+builder.Services.AddMemoryCache();
 
 builder.Configuration.AddJsonFile("appsettings.json"); 
 
@@ -54,6 +57,13 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
+
+// Logowanie danych
+builder.Services.AddLogging(loggingBuilder =>
+{
+    loggingBuilder.AddConsole();
+    loggingBuilder.AddDebug();
+});
 
 
 // Swagger
